@@ -1,0 +1,54 @@
+// Mobile nav toggle
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.2});
+revealEls.forEach(el => io.observe(el));
+
+// Animate skill bars
+window.addEventListener('load', () => {
+  document.querySelectorAll('.bar').forEach(bar => {
+    const lvl = bar.dataset.level;
+    bar.querySelector('::after');
+    bar.style.setProperty('--w', lvl + '%');
+    bar.style.width = lvl + '%';
+    bar.animate([{width:'0%'},{width:lvl+'%'}],{duration:1000,fill:'forwards'});
+  });
+});
+
+// Back-to-top button
+const toTop = document.querySelector('.to-top');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) toTop.classList.add('show');
+  else toTop.classList.remove('show');
+});
+
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Starfield background
+(function(){
+  const c=document.getElementById('stars');
+  const ctx=c.getContext('2d');
+  let w,h,stars;
+  function resize(){
+    w=c.width=window.innerWidth;
+    h=c.height=window.innerHeight;
+    stars=Array.from({length:100},()=>({x:Math.random()*w,y:Math.random()*h,s:Math.random()*1.5}));
+  }
+  resize(); window.addEventListener('resize',resize);
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='white';
+    stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.s,0,Math.PI*2);ctx.fill();s.y+=s.s*0.5;if(s.y>h)s.y=0;});
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
