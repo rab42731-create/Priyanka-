@@ -1,0 +1,65 @@
+:root {
+  --bg:#0b0f19;
+  --text:#e6e9f2;
+  --muted:#adb5d6;
+  --primary:#7c5cff;
+  --accent:#00d4ff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* Background */
+.bg { position:fixed; inset:0; z-index:-2; }
+.blob { position:absolute; filter:blur(50px); opacity:.5; animation:float 20s infinite; }
+.b1 { width:400px;height:400px;left:-100px;top:-100px;background:var(--primary);}
+.b2 { width:350px;height:350px;right:-100px;top:30vh;background:var(--accent);}
+.b3 { width:300px;height:300px;left:30vw;bottom:-100px;background:#ff4f81;}
+@keyframes float { 0%,100%{transform:translate(0)} 50%{transform:translate(30px,-30px);} }
+
+/* Header */
+.site-header { display:flex;justify-content:space-between;align-items:center;padding:1rem;background:#1118;position:sticky;top:0; }
+.logo { font-weight:bold;color:var(--text);text-decoration:none; }
+.nav { display:flex;gap:1rem; }
+.nav a { color:var(--muted);text-decoration:none; }
+.nav a:hover { color:var(--text); }
+
+/* Hero */
+.hero { display:grid;place-items:center;min-height:70vh;text-align:center;padding:2rem; }
+.hero h1 span { color:var(--accent); }
+.subtitle { color:var(--muted); }
+
+/* Buttons */
+.btn, .btn-outline { padding:.7rem 1rem;border-radius:8px;text-decoration:none;font-weight:bold; }
+.btn { background:var(--primary);color:white; }
+.btn-outline { border:1px solid var(--accent);color:var(--accent); }
+
+/* Sections */
+.section { padding:4rem 1rem; }
+.section.alt { background:#1115; }
+.section-title { font-size:2rem;margin-bottom:1rem;text-align:center; }
+.container { max-width:900px;margin:0 auto; }
+
+/* Skills */
+.skills-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem; }
+.skill { background:#111a;padding:1rem;border-radius:10px; }
+.bar { height:8px;background:#333;border-radius:4px;position:relative;overflow:hidden; }
+.bar::after { content:\"\";position:absolute;top:0;left:0;height:100%;background:var(--accent);width:0; }
+
+/* Projects */
+.projects-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem; }
+.card { background:#111a;padding:1rem;border-radius:10px; }
+
+/* Contact */
+.contact-form { display:grid;gap:1rem; }
+input,textarea { padding:.7rem;border-radius:6px;border:none; }
+
+/* Footer */
+.site-footer { text-align:center;padding:1rem;color:var(--muted); }
+.to-top { position:fixed;bottom:1rem;right:1rem;background:#222;padding:.5rem;border-radius:6px;text-decoration:none;color:var(--text);opacity:0;transition:.3s; }
+.to-top.show { opacity:1; }
